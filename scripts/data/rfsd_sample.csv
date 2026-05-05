@@ -1,4 +1,4 @@
-﻿inn,year,region,okved,line_2110,line_2400,line_1600,line_1300,line_1500,line_4100,age,eligible,filed,outlier,line_1250,line_1410,line_2120,line_2200,line_2300,line_4400
+﻿inn,year,region,okved,PL_revenue,PL_net_profit,B_assets,B_total_equity,B_shortterm_liab,CF_balance_operating,age,eligible,filed,outlier,B_cash_equivalents,B_longterm_debt,PL_cost_of_sales,PL_profit_from_sales,PL_before_tax,CF_balance
 5535001002,2023,omsk,85.42.10,11008.0,1052.0,11155.0,9805.0,1350.0,,30.0,1.0,1.0,0.0,2551.0,,-8584.0,1844.0,1414.0,0.0
 1001230827,2023,karelia,93.11,3519.0,392.0,1988.0,10.0,30.0,,13.0,1.0,1.0,0.0,88.0,1948.0,-3051.0,468.0,468.0,
 3808140332,2023,irkutsk,61.10,92392.0,14647.0,40103.0,24327.0,15776.0,9658.0,17.0,1.0,1.0,0.0,2764.0,,-58951.0,18378.0,17888.0,-2030.0

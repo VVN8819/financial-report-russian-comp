@@ -53,6 +53,17 @@ def load_rfsd():
     df = combined.to_pandas().sample(n=num_rows, random_state=random_state).reset_index(drop=True)
     print(f"Данные загружены за {time.time() - start:.2f} сек | Строк: {len(df)}")
 
+    # Переименование колонок
+    try:
+        renaming_df = pd.read_csv(
+            'https://raw.githubusercontent.com/irlcode/RFSD/main/aux_data/descriptive_names_dict.csv'
+        )
+        rename_dict = dict(zip(renaming_df['original'], renaming_df['descriptive']))
+        df = df.rename(columns={k: v for k, v in rename_dict.items() if k in df.columns})
+        print("Колонки переименованы")
+    except Exception as e:
+        print(f"Словарь не загружен: {e}.")
+
     # Сохранение
     df.to_csv(output_csv, index=False, encoding='utf-8-sig')
     print(f" Сохранено в: {output_csv}")
