@@ -108,3 +108,15 @@ print(f'Пропуски после фильтрации:\n{df_imp.isnull().mean
 
 # проверим на дубли
 print(f'Найдено дублей: {df_imp.duplicated(subset=['inn', 'year']).sum()} шт')
+
+# ====================== Заполним медианой остатки =====================
+# Медиана для пустых значений
+empt_cols = [
+    'PL_revenue', 'PL_net_profit', 'B_total_equity', 'B_shortterm_liab', 'B_current_assets',
+    'PL_cost_of_sales', 'PL_profit_from_sales', 'B_cash_equivalents', 'PL_before_tax'
+]
+for col in empt_cols:
+    if col in df_imp.columns and df_imp[col].isnull().any():
+        median_val = df_imp[col].median()
+        df_imp[col] = df_imp[col].fillna(median_val)
+        print(f'{col}: заполнена медианой={median_val}')
