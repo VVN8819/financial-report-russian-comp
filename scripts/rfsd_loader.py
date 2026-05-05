@@ -79,3 +79,32 @@ df.info(memory_usage='deep')
 
 # выявим пропущенные значения с помощью .isnull() и посчитаем их количество через mean()
 print(df.isnull().mean())
+
+# ======================== Очистка df ==============================================
+# переменные B_longterm_debt, B_noncurrent_assets, CF_balance_operating, CF_balance_invest,
+# CF_balance_fin, CF_balance , скорее всего, не являются самыми важными
+cols_to_drop = [
+    'CF_balance_operating',
+    'CF_balance_invest',
+    'CF_balance_fin',
+    'CF_balance',
+    'B_longterm_debt',
+    'B_noncurrent_assets'
+]
+
+df.drop(columns=cols_to_drop, inplace=True, errors='ignore')
+
+# Оставляем только компании с важными колонками для анализа
+imp_cols = [
+    'PL_revenue', 'B_assets', 'B_total_equity', 'PL_net_profit',
+    'PL_cost_of_sales', 'PL_profit_from_sales', 'PL_before_tax'
+]
+
+# Фильтруем строки, где есть хотя бы 3 из 7 ключевых показателей
+df_imp = df[df[imp_cols].notna().sum(axis=1) >= 3].copy()
+
+print(f'Осталось {len(df_imp)} из {len(df)} компаний ({len(df_imp)/len(df)*100:.1f}%)')
+print(f'Пропуски после фильтрации:\n{df_imp.isnull().mean()}')
+
+# проверим на дубли
+print(f'Найдено дублей: {df_imp.duplicated(subset=['inn', 'year']).sum()} шт')
