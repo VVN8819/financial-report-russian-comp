@@ -120,3 +120,17 @@ for col in empt_cols:
         median_val = df_imp[col].median()
         df_imp[col] = df_imp[col].fillna(median_val)
         print(f'{col}: заполнена медианой={median_val}')
+
+# ====================== Сохранение очищенного csv файла ===================
+# проверим пропуски очищенного df
+print(df_imp.isnull().mean())
+
+# сохраним полученный df в csv файл
+base_dir = Path(__file__).parent.resolve()
+data_dir = base_dir / "data"
+data_dir.mkdir(exist_ok=True)  # Создаём папку, если нет
+
+output_clean_csv = data_dir / "rfsd_sample_clean.csv"
+
+df_imp.to_csv(output_clean_csv, index=False, encoding='utf-8-sig')
+print(f'Сохранено в: {output_clean_csv}')
