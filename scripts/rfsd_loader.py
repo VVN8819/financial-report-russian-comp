@@ -12,17 +12,17 @@ data_dir = base_dir / "data"
 data_dir.mkdir(exist_ok=True)  # Создаём папку, если нет
 
 output_csv = data_dir / "rfsd_sample.csv"
-year = 2023
-num_rows = 2000
+year = 2022
+num_rows = 4000
 random_state = 42
 
-# Колонки (20 шт)
+# Колонки (24 шт)
 columns = [
     'inn', 'year', 'region', 'okved',
     'line_2110', 'line_2400', 'line_1600', 'line_1300',
     'line_1500', 'line_4100', 'age', 'eligible',
-    'filed', 'outlier', 'line_1250', 'line_1410',
-    'line_2120', 'line_2200', 'line_2300', 'line_4400'
+    'filed', 'outlier', 'line_1100', 'line_1200', 'line_1250', 'line_1410',
+    'line_2120', 'line_2200', 'line_2300', 'line_4200', 'line_4300', 'line_4400'
 ]
 
 def load_rfsd():
