@@ -16,6 +16,11 @@ def main():
         random_state=42
     )
     
+    base_path = Path(__file__).parent
+    scripts_path = base_path / "scripts"
+    reports_path = scripts_path / "reports"  # Папка для графиков
+    reports_path.mkdir(exist_ok=True)  # Создаём, если нет
+    
     # 1-ый запуск eda
     run_eda(df_raw)
     
@@ -28,13 +33,13 @@ def main():
     # сохранение df_clean
     output_path = clean_df_save(df_clean, "rfsd_sample_clean.csv")
     
-    base_path = Path(__file__).parent
+    # Гистограммы для 3 выбранных колонок
+    cols_for_histograms(df_clean)
+    
     print(f"Сырые данные: {base_path / 'scripts' / 'data' / 'rfsd_sample.csv'}")
     print(f'Очищенные данные: {output_path}')
     print(f'Итоговый размер: {df_clean.shape[0]} строк × {df_clean.shape[1]} колонок')
-    
-    # Гистограммы для 3 выбранных колонок
-    cols_for_histograms(df_clean)
+    print(f"Графики сохранены в: {reports_path}")
     
 if __name__ == "__main__":
     main()

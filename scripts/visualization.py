@@ -1,24 +1,39 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from pathlib import Path
 
 # ================== Гистограммы для 3 выбранных колонок ============================
-def cols_for_histograms(df: pd.DataFrame) -> None:
+def cols_for_histograms(
+    df: pd.DataFrame,
+    save_dir: str = None # для сохранения графика
+) -> None:
 
     # Выбираем cols: ('имя_колонки', использовать_логарифм)
     cols_to_plot = [
-        ('PL_revenue', True), # выручка
-        ('PL_net_profit', True), # прибыль
-        ('age', False) # возраст
+        ('PL_revenue', True, 'revenue_hist.png'), # выручка
+        ('PL_net_profit', True, 'profit_hist.png'), # прибыль
+        ('age', False, 'age_hist.png') # возраст
     ]
 
-    for col, use_log in cols_to_plot:
-        if col in df.columns:
-            plot_histogram(df, col, use_log=use_log)
-        else:
+    for col, use_log, filename in cols_to_plot:
+        if col not in df.columns:
             print(f'Колонка {col} не найдена')
+            continue
+        
+        # Путь для сохранения графика
+        save_path = None
+        if save_dir:
+            save_path = Path(save_dir) / filename
+            
+        plot_histogram(df, col, use_log=use_log, save_path=save_path)
 
-def plot_histogram(df: pd.DataFrame, col: str, use_log: bool = True) -> int:
+def plot_histogram(
+    df: pd.DataFrame, 
+    col: str,
+    use_log: bool = True,
+    save_path: str = None
+) -> int:
 
     data = df[col].dropna()
 
@@ -39,5 +54,15 @@ def plot_histogram(df: pd.DataFrame, col: str, use_log: bool = True) -> int:
 
     plt.suptitle(f'Анализ: {col}', fontsize=14, y=1.02)
     plt.tight_layout()
+    
+    # Сохраняем графики
+    if save_path:
+        # Создаём папку, если нет
+        Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white')
+        print(f'График сохранён: {save_path}')
+    
+    # Показываем график
     plt.show()
+    plt.close(fig)
     
