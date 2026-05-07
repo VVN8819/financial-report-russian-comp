@@ -7,6 +7,7 @@ from rfsd_loader import load_rfsd
 from preprocess import preprocess_pipeline, clean_df_save
 from eda import run_eda
 from visualization import cols_for_histograms
+from correlations import plot_correlation_matrix
 
 def main():
     # сырые данные
@@ -35,6 +36,12 @@ def main():
     
     # Гистограммы для 3 выбранных колонок
     cols_for_histograms(df_clean, save_dir=reports_path)
+    
+    # Корреляция
+    plot_correlation_matrix(
+        df_clean, 
+        save_path=reports_path / "correlation_matrix.png"
+    )
     
     print(f"Сырые данные: {base_path / 'scripts' / 'data' / 'rfsd_sample.csv'}")
     print(f'Очищенные данные: {output_path}')
