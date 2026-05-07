@@ -10,7 +10,9 @@ def basic_info(df: pd.DataFrame) -> None:
 def missing_values_rep(df: pd.DataFrame) -> None:
     print(df.isnull().mean())
 
-# Описательная статистика
+# ======================= Описательная статистика ==================================
+# Выводит описательную статистику только для числовых колонок.
+# Числа округлены до 2 знаков
 def descrip_stat(df: pd.DataFrame) -> None:
     num_cols = df.select_dtypes(include=[np.number]).columns
     print(df[num_cols].describe().T.round(2))

@@ -6,6 +6,7 @@ sys.path.insert(0, str(Path(__file__).parent / "scripts"))
 from rfsd_loader import load_rfsd
 from preprocess import preprocess_pipeline, clean_df_save
 from eda import run_eda
+from visualization import cols_for_histograms
 
 def main():
     # сырые данные
@@ -31,6 +32,9 @@ def main():
     print(f"Сырые данные: {base_path / 'scripts' / 'data' / 'rfsd_sample.csv'}")
     print(f'Очищенные данные: {output_path}')
     print(f'Итоговый размер: {df_clean.shape[0]} строк × {df_clean.shape[1]} колонок')
+    
+    # Гистограммы для 3 выбранных колонок
+    cols_for_histograms(df_clean)
     
 if __name__ == "__main__":
     main()
