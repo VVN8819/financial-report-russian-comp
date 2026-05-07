@@ -1,4 +1,4 @@
-﻿inn,year,region,okved,line_2110,line_2400,line_1600,line_1300,line_1500,line_4100,age,eligible,filed,outlier,line_1100,line_1200,line_1250,line_1410,line_2120,line_2200,line_2300,line_4200,line_4300,line_4400
+﻿inn,year,region,okved,PL_revenue,PL_net_profit,B_assets,B_total_equity,B_shortterm_liab,CF_balance_operating,age,eligible,filed,outlier,B_noncurrent_assets,B_current_assets,B_cash_equivalents,B_longterm_debt,PL_cost_of_sales,PL_profit_from_sales,PL_before_tax,CF_balance_invest,CF_balance_fin,CF_balance
 2310211630,2022,krasnodar,46.48.20,,,,,,,4.0,1.0,0.0,0.0,,,,,,,,,,
 7453339789,2022,chelyabinsk,46.69.90,1101.0,162.0,200.0,183.0,17.0,,1.0,1.0,1.0,0.0,,200.0,23.0,,-883.0,218.0,202.0,,,
 7300008395,2022,ulyanovsk,49.41,455.0,0.0,49056.0,10.0,1545.0,,0.0,1.0,1.0,0.0,48789.0,267.0,20.0,,-452.0,3.0,2.0,,,
