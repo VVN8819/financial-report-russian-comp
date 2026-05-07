@@ -51,6 +51,17 @@ def plot_histogram(
         ax1.set_ylabel('Количество компаний')
         ax1.legend()
         ax1.grid(axis='y', alpha=0.3)
+        
+    # Boxplot
+    ax2 = axes[1]
+    box_data = data if not use_log else np.log1p(data[data >= 0])
+    if len(box_data) > 0:
+        ax2.boxplot(box_data.dropna(), vert=False, patch_artist=True,
+                   boxprops=dict(facecolor='lightblue', color='blue'),
+                   medianprops=dict(color='red', linewidth=2))
+        ax2.set_title(f'Boxplot: {col} {"(лог)" if use_log else ""}')
+        ax2.set_xlabel('Значение')
+        ax2.grid(axis='x', alpha=0.3)
 
     plt.suptitle(f'Анализ: {col}', fontsize=14, y=1.02)
     plt.tight_layout()
@@ -66,3 +77,23 @@ def plot_histogram(
     plt.show()
     plt.close(fig)
     
+    # ========================== Ищем выбросы (метод IQR) ========================
+    Q1 = data.quantile(0.25)
+    Q3 = data.quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 3 * IQR
+    upper_bound = Q3 + 3 * IQR
+
+    outliers = data[(data < lower_bound) | (data > upper_bound)]
+    outlier_pct = len(outliers) / len(data) * 100
+
+    print(f'\nВыбросы в {col}:')
+    print(f'Диапазон нормальных: [{lower_bound:,.0f}; {upper_bound:,.0f}]')
+    print(f'Выбросов: {len(outliers)} шт. ({outlier_pct:.1f}%)')
+
+    if len(outliers) > 0 and len(outliers) <= 5:
+        print(f'Значения: {outliers.tolist()}')
+    elif len(outliers) > 5:
+        print(f'Примеры: {outliers.head(3).tolist()} ...')
+
+    return len(outliers)
