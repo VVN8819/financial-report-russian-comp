@@ -34,7 +34,7 @@ def main():
     output_path = clean_df_save(df_clean, "rfsd_sample_clean.csv")
     
     # Гистограммы для 3 выбранных колонок
-    cols_for_histograms(df_clean)
+    cols_for_histograms(df_clean, save_dir=reports_path)
     
     print(f"Сырые данные: {base_path / 'scripts' / 'data' / 'rfsd_sample.csv'}")
     print(f'Очищенные данные: {output_path}')
