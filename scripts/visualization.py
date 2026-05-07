@@ -78,9 +78,9 @@ def plot_histogram(
     plt.close(fig)
     
     # ========================== Ищем выбросы (метод IQR) ========================
-    Q1 = data.quantile(0.25)
-    Q3 = data.quantile(0.75)
-    IQR = Q3 - Q1
+    Q1 = data.quantile(0.25) # Нижний квартиль
+    Q3 = data.quantile(0.75) # Верхний квартиль
+    IQR = Q3 - Q1 # межквартильный размах
     lower_bound = Q1 - 3 * IQR
     upper_bound = Q3 + 3 * IQR
 
@@ -88,7 +88,10 @@ def plot_histogram(
     outlier_pct = len(outliers) / len(data) * 100
 
     print(f'\nВыбросы в {col}:')
-    print(f'Диапазон нормальных: [{lower_bound:,.0f}; {upper_bound:,.0f}]')
+    print(f'Нижний квартиль: {Q1}')
+    print(f'Верхний квартиль: {Q3}')
+    print(f'Межквартильный размах: {IQR}')
+    print(f'Верхние и нижние границы исключения выбросов: [{lower_bound:,.0f}; {upper_bound:,.0f}]')
     print(f'Выбросов: {len(outliers)} шт. ({outlier_pct:.1f}%)')
 
     if len(outliers) > 0 and len(outliers) <= 5:
