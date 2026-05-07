@@ -11,7 +11,7 @@ def main():
     # сырые данные
     df_raw = load_rfsd(
         year=2022,
-        num_rows=4000,
+        num_rows=2000,
         random_state=42
     )
     

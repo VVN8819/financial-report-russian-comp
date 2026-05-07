@@ -8,7 +8,7 @@ from huggingface_hub import HfFileSystem, hf_hub_download
 
 def load_rfsd(
     year: int = 2022,
-    num_rows: int = 4000,
+    num_rows: int = 2000,
     random_state: int = 42,
     data_dir: Path = None
 ) -> pd.DataFrame:
