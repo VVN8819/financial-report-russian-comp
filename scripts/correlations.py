@@ -56,8 +56,9 @@ def plot_scatter_pairs(df: pd.DataFrame, pairs: list, save_dir: str = None) -> N
             print(f'Нет колонок {x_col} или {y_col}')
             continue
 
-        # Убираем NaN
-        plot_df = df[[x_col, y_col]].dropna()
+        # Фильтруем данные для Лог-шкалы
+        mask = (df[x_col] > 0) & (df[y_col] > 0)
+        plot_df = df.loc[mask, [x_col, y_col]]
 
         if len(plot_df) < 10:
             print(f'Мало данных для {x_col} vs {y_col}')
@@ -74,14 +75,18 @@ def plot_scatter_pairs(df: pd.DataFrame, pairs: list, save_dir: str = None) -> N
             scatter_kws={'alpha': 0.6, 'color': 'blue', 's': 40}, # Точки
             line_kws={'color': 'red', 'linewidth': 2} # Линия тренда
         )
+        
+        # Лог-шкала
+        plt.xscale('log')
+        plt.yscale('log')
 
-        plt.title(f'{title}', fontsize=14)
+        plt.title(f'{title} (Log)', fontsize=14)
         plt.xlabel(x_col, fontsize=12)
         plt.ylabel(y_col, fontsize=12)
-        plt.grid(True, alpha=0.3)
+        plt.grid(True, which="both", ls="--", alpha=0.3)
 
         # Сохранение
-        filename = f"scatter_{x_col}_vs_{y_col}.png"
+        filename = f"scatter_log_{x_col}_vs_{y_col}.png"
         if save_dir:
             full_path = Path(save_dir) / filename
             plt.savefig(full_path, dpi=300, bbox_inches='tight')
