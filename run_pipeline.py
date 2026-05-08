@@ -46,7 +46,12 @@ def main():
     # Диаграммы рассеивания
     pairs_to_plot = [
         ('PL_revenue', 'PL_cost_of_sales', 'Выручка vs Себестоимость'),
-        ('PL_before_tax', 'PL_net_profit', 'Прибыль до налогов vs Чистая прибыль')
+        ('PL_before_tax', 'PL_net_profit', 'Прибыль до налогов vs Чистая прибыль'),
+        ('B_assets', 'B_shortterm_liab', 'Активы vs Краткосрочные обязательства'),
+        ('B_assets', 'B_current_assets', 'Активы vs Оборотные активы'),
+        ('B_shortterm_liab', 'B_current_assets', 'Кратк. обязательства vs Оборотные активы'),
+        ('PL_profit_from_sales', 'B_total_equity', 'Прибыль от продаж vs Капитал'),
+        ('PL_profit_from_sales', 'PL_before_tax', 'Прибыль до налогов vs Прибыль от продаж')
     ]
     
     plot_scatter_pairs(
