@@ -7,7 +7,7 @@ from rfsd_loader import load_rfsd
 from preprocess import preprocess_pipeline, clean_df_save
 from eda import run_eda
 from visualization import cols_for_histograms
-from correlations import plot_correlation_matrix
+from correlations import plot_correlation_matrix, plot_scatter_pairs
 
 def main():
     # сырые данные
@@ -41,6 +41,18 @@ def main():
     plot_correlation_matrix(
         df_clean, 
         save_path=reports_path / "correlation_matrix.png"
+    )
+    
+    # Диаграммы рассеивания
+    pairs_to_plot = [
+        ('PL_revenue', 'PL_cost_of_sales', 'Выручка vs Себестоимость'),
+        ('PL_before_tax', 'PL_net_profit', 'Прибыль до налогов vs Чистая прибыль')
+    ]
+    
+    plot_scatter_pairs(
+        df_clean,
+        pairs_to_plot,
+        save_dir=reports_path
     )
     
     print(f"Сырые данные: {base_path / 'scripts' / 'data' / 'rfsd_sample.csv'}")

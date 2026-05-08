@@ -45,3 +45,47 @@ def plot_correlation_matrix(
     plt.show()
 
     return corr_matrix
+
+# ======================= Диаграммы рассеивания ==============================
+# Строит Scatter Plot (диаграмму рассеивания) для списка пар колонок
+def plot_scatter_pairs(df: pd.DataFrame, pairs: list, save_dir: str = None) -> None:
+
+    for x_col, y_col, title in pairs: # цыкл для нескольких пар
+        # Проверка наличия колонок
+        if x_col not in df.columns or y_col not in df.columns:
+            print(f'Нет колонок {x_col} или {y_col}')
+            continue
+
+        # Убираем NaN
+        plot_df = df[[x_col, y_col]].dropna()
+
+        if len(plot_df) < 10:
+            print(f'Мало данных для {x_col} vs {y_col}')
+            continue
+
+        # Рисуем график
+        plt.figure(figsize=(10, 8))
+
+        # regplot рисует точки + линию линейной регрессии (тренд)
+        sns.regplot(
+            x=x_col,
+            y=y_col,
+            data=plot_df,
+            scatter_kws={'alpha': 0.6, 'color': 'blue', 's': 40}, # Точки
+            line_kws={'color': 'red', 'linewidth': 2} # Линия тренда
+        )
+
+        plt.title(f'{title}', fontsize=14)
+        plt.xlabel(x_col, fontsize=12)
+        plt.ylabel(y_col, fontsize=12)
+        plt.grid(True, alpha=0.3)
+
+        # Сохранение
+        filename = f"scatter_{x_col}_vs_{y_col}.png"
+        if save_dir:
+            full_path = Path(save_dir) / filename
+            plt.savefig(full_path, dpi=300, bbox_inches='tight')
+            print(f'Сохранено: {filename}')
+
+        plt.tight_layout()
+        plt.show()
