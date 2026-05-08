@@ -1,0 +1,40 @@
+# Основы работы с данными
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Чтение Parquet и работа с Hugging Face
+pyarrow>=12.0.0
+huggingface_hub>=0.16.0
+
+# Визуализация графиков
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Файл rfsd_loader.py требуются библиотеки:
+import time
+from pathlib import Path
+import pyarrow.parquet as pq
+import pyarrow as pa
+import pandas as pd
+from huggingface_hub import HfFileSystem, hf_hub_download
+
+# Файл eda.py требуются библиотеки:
+import pandas as pd
+import numpy as np
+
+# Файл preprocess.py требуются библиотеки:
+import pandas as pd
+from pathlib import Path
+
+# Файл visualization.py требуются библиотеки:
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from pathlib import Path
+
+# Файл correlations.py требуются библиотеки:
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pathlib import Path

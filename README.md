@@ -7,6 +7,7 @@
 - Описательную статистику с визуализацией через гистораммы ('.hist'), ящик с усами (.boxplot) их сохранение в струтуре
 - Расчёт, визуализация корреляций (.corr, .heatmap) их сохранение в струтуре
 - Вывод диаграмм рассеивания с Лог-шкалой (.regplot, .xscale('log'),.yscale('log')) между коррелирующими колонками, их сохранение в струтуре
+- Подведение итогов
 
 # Структура репозитория
 financial-report-russian-comp/
@@ -39,7 +40,9 @@ financial-report-russian-comp/
 
 4. README.md - Документация проекта
 
-5. run_pipeline.py - вызывает rfsd_loader.py, preprocess.py, eda.py, visualization.py, correlations.py
+5. requirements.txt - Список внешних пакетов.
+
+6. run_pipeline.py - вызывает rfsd_loader.py, preprocess.py, eda.py, visualization.py, correlations.py
 
 # Описание ключевых файлов
 - scripts/rfsd_loader.py - Демонстрация поиска, загрузки, чтения, переименования и сохранения файлов за нужный год ('HfFileSystem', 'hf_hub_download', 'pathlib'). Вычленяет данные за определенный год с ограниченным количеством строк и колонок.
