@@ -1,11 +1,8 @@
 # Environments
 .env
 
-# venv/
-# .venv/
-# env/
-# ENV/
-venv/Include/
-venv/Lib/
-venv/Scripts/
+venv/
+.venv/
+env/
+ENV/
 __pycache__
